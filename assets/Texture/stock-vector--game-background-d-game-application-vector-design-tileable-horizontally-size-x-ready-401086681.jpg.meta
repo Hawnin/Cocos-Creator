@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "18d14ddf-8bd2-41c2-9967-7d830c264852",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "stock-vector--game-background-d-game-application-vector-design-tileable-horizontally-size-x-ready-401086681": {
+      "ver": "1.0.3",
+      "uuid": "6630efe8-eed2-427c-a31f-5a43d3681664",
+      "rawTextureUuid": "18d14ddf-8bd2-41c2-9967-7d830c264852",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 450,
+      "height": 245,
+      "rawWidth": 450,
+      "rawHeight": 245,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
