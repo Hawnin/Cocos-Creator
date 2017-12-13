@@ -1,0 +1,196 @@
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+		jumpHeight: 300,
+		jumpDuration: 0.3,
+		maxMoveSpeed: 800,
+		
+		accel:1000,
+    },
+	setJumpAction: function () { // finally working
+        // jump up
+        var jumpUp = cc.moveBy(this.jumpDuration, cc.p(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
+        // jump down
+        var jumpDown = cc.moveBy(this.jumpDuration, cc.p(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
+        // repeat
+        return cc.repeatForever(cc.sequence(jumpUp, jumpDown));
+    },
+	setInputControl: function () { // finally working
+        var self = this;
+        // add keyboard event listener
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            // When there is a key being pressed down, judge if it's the designated directional button and set up acceleration in the corresponding direction
+            onKeyPressed: function(keyCode, event) {
+				switch(keyCode) {
+                    case cc.KEY.a:
+                        self.accLeft = true;
+                        self.accRight = false;
+                        break;
+                    case cc.KEY.d:
+                        self.accLeft = false;
+                        self.accRight = true;
+                        break;
+                }
+            },
+            // when releasing the button, stop acceleration in this direction
+            onKeyReleased: function(keyCode, event) {
+                switch(keyCode) {
+                    case cc.KEY.a:
+                        self.accLeft = false;
+                        break;
+                    case cc.KEY.d:
+                        self.accRight = false;
+                        break;
+                }
+            }
+			        }, self.node);
+    },
+	
+	onDisabled: function () {
+        cc.director.getCollisionManager().enabled = false;
+        cc.director.getCollisionManager().enabledDebugDraw = false;
+    },
+	
+	onCollisionEnter: function (other, self) {
+        this.node.color = cc.Color.RED;
+
+        this.touchingNumber ++;
+        
+        // 1st step 
+        // get pre aabb, go back before collision
+        var otherAabb = other.world.aabb;
+        var otherPreAabb = other.world.preAabb.clone();
+
+        var selfAabb = self.world.aabb;
+        var selfPreAabb = self.world.preAabb.clone();
+
+        // 2nd step
+        // forward x-axis, check whether collision on x-axis
+        selfPreAabb.x = selfAabb.x;
+        otherPreAabb.x = otherAabb.x;
+
+        if (cc.Intersection.rectRect(selfPreAabb, otherPreAabb)) {
+            if (this.speed.x < 0 && (selfPreAabb.xMax > otherPreAabb.xMax)) {
+                this.node.x = otherPreAabb.xMax - this.node.parent.x;
+                this.collisionX = -1;
+            }
+            else if (this.speed.x > 0 && (selfPreAabb.xMin < otherPreAabb.xMin)) {
+                this.node.x = otherPreAabb.xMin - selfPreAabb.width - this.node.parent.x;
+                this.collisionX = 1;
+            }
+
+            this.speed.x = 0;
+            other.touchingX = true;
+            return;
+        }
+
+        // 3rd step
+        // forward y-axis, check whether collision on y-axis
+        selfPreAabb.y = selfAabb.y;
+        otherPreAabb.y = otherAabb.y;
+
+        if (cc.Intersection.rectRect(selfPreAabb, otherPreAabb)) {
+            if (this.speed.y < 0 && (selfPreAabb.yMax > otherPreAabb.yMax)) {
+                this.node.y = otherPreAabb.yMax - this.node.parent.y;
+                this.jumping = false;
+                this.collisionY = -1;
+            }
+            else if (this.speed.y > 0 && (selfPreAabb.yMin < otherPreAabb.yMin)) {
+                this.node.y = otherPreAabb.yMin - selfPreAabb.height - this.node.parent.y;
+                this.collisionY = 1;
+            }
+            
+            this.speed.y = 0;
+            other.touchingY = true;
+        }    
+        
+    },
+	 
+	onCollisionStay: function (other, self) {
+        if (this.collisionY === -1) {
+            if (other.node.group === 'Platform') {
+                var motion = other.node.getComponent('PlatformMotion');
+                if (motion) {
+                    this.node.x += motion._movedDiff;
+                }
+            }
+
+            // this.node.y = other.world.aabb.yMax;
+
+            // var offset = cc.v2(other.world.aabb.x - other.world.preAabb.x, 0);
+            
+            // var temp = cc.affineTransformClone(self.world.transform);
+            // temp.tx = temp.ty = 0;
+            
+            // offset = cc.pointApplyAffineTransform(offset, temp);
+            // this.node.x += offset.x;
+        }
+    },
+	
+	onCollisionExit: function (other) {
+        this.touchingNumber --;
+        if (this.touchingNumber === 0) {
+            this.node.color = cc.Color.WHITE;
+        }
+
+        if (other.touchingX) {
+            this.collisionX = 0;
+            other.touchingX = false;
+        }
+        else if (other.touchingY) {
+            other.touchingY = false;
+            this.collisionY = 0;
+            this.jumping = true;
+        }
+    },
+	
+    onLoad: function () { //finally working
+	
+	    cc.director.getCollisionManager().enabled = true;
+        cc.director.getCollisionManager().enabledDebugDraw = true;
+		
+		//initiate infinite jump for the player
+		this.jumpAction = this.setJumpAction();
+		this.node.runAction(this.jumpAction);
+
+        // switch of acceleration direction
+        this.accLeft = false;
+        this.accRight = false;
+
+        // current speed of main character
+        this.xSpeed = 0;
+        
+		this.collisionX = 0;
+        this.collisionY = 0;
+        this.touchingNumber = 0;
+		
+		// initialize keyboard input listener
+		this.setInputControl();
+	
+    },
+	
+	 update: function (dt) { //finally working
+		if(this.collisionX === 0){
+			this.
+		}
+        // update speed of each frame according to the current acceleration direction
+        if (this.accLeft) {
+			this.xSpeed = 0;
+            this.xSpeed = -700;
+        }else if (this.accRight) {
+            this.xSpeed = 0;
+			this.xSpeed = 700;
+        }else {
+			this.xSpeed = 0;
+		}
+		//Blocking my player to exit the screen
+		if(this.node.x<-320 ){
+			this.xSpeed = 700;
+		}else if(this.node.x>320){
+			this.xSpeed = -700;
+		}
+        this.node.x += this.xSpeed * dt;
+    },
+});
