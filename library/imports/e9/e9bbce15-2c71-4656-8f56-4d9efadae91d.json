@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "groundWinStar",
+    "texture": "85d59d2b-30f6-47e6-9fc4-1e70e16a2643",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      400,
+      300
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      400,
+      300
+    ]
+  }
+}

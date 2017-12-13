@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "GroundStart",
+    "texture": "72830c60-4cfb-4670-adb4-65f5c3b91c66",
+    "atlas": "",
+    "rect": [
+      0,
+      1,
+      640,
+      142
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      640,
+      143
+    ]
+  }
+}

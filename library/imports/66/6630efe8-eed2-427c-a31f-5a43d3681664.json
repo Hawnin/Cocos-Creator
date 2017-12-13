@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "stock-vector--game-background-d-game-application-vector-design-tileable-horizontally-size-x-ready-401086681",
+    "texture": "18d14ddf-8bd2-41c2-9967-7d830c264852",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      450,
+      245
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      450,
+      245
+    ]
+  }
+}

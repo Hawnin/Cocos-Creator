@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "groundone",
+    "texture": "75de1c64-955a-4cd8-8454-e7c6a1d13826",
+    "atlas": "",
+    "rect": [
+      0,
+      3,
+      57,
+      46
+    ],
+    "offset": [
+      -0.5,
+      -0.5
+    ],
+    "originalSize": [
+      58,
+      51
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      24
+    ]
+  }
+}

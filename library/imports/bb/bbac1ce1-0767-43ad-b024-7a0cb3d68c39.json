@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "StartGroundSketch",
+    "texture": "9a30b607-5755-4352-ac70-f01dd6e6e8c8",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      269,
+      160
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      269,
+      160
+    ]
+  }
+}

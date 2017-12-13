@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "groundwin",
+    "texture": "456ece13-6dc0-45dd-a2a3-efe8383b8606",
+    "atlas": "",
+    "rect": [
+      12,
+      12,
+      75,
+      72
+    ],
+    "offset": [
+      -1.5,
+      -3
+    ],
+    "originalSize": [
+      102,
+      90
+    ]
+  }
+}
